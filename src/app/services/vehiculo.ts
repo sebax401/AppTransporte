@@ -10,14 +10,18 @@ export interface Vehiculo {
   anio: number;
   kilometrajeActual: number;
   proximoKilometraje: number;
-  fechaRevisionTecnica: string;
-  fechaUltimaMantencion: string;
-  fechaProximaMantencion: string;
+
+  fechaRevisionTecnica: string | null;
+  fechaUltimaMantencion: string | null;
+  fechaProximaMantencion: string | null;
+
   estadoDpf: string;
   estadoRevision: string;
   estadoExtintor: string;
   observacion: string;
-  idConductor: number;
+
+  idConductor: number | null;
+
   estado: boolean;
 }
 
@@ -29,6 +33,10 @@ export class VehiculoService {
   private apiUrl = 'https://localhost:7218/api/Vehiculos';
 
   constructor(private http: HttpClient) {}
+
+  agregarVehiculo(vehiculo: Vehiculo): Observable<Vehiculo> {
+    return this.http.post<Vehiculo>(this.apiUrl, vehiculo);
+  }
 
   obtenerVehiculos(): Observable<Vehiculo[]> {
     return this.http.get<Vehiculo[]>(this.apiUrl);

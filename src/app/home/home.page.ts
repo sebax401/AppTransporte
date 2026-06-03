@@ -22,24 +22,36 @@ import { VehiculoService, Vehiculo } from '../services/vehiculo';
 export class HomePage {
   
   vehiculos: Vehiculo[] = [];
+  results: Vehiculo[] = [];
 
     constructor(private vehiculoService: VehiculoService) {
       addIcons({ cartOutline });
     }
 
-        ngOnInit() {
-          console.log('Home cargado');
-          this.cargarVehiculos();
-        }
+    ngOnInit() {
+      this.cargarVehiculos();
+    }
 
     cargarVehiculos() {
       this.vehiculoService.obtenerVehiculos().subscribe({
         next: (data) => {
           this.vehiculos = data;
+          this.results = data;
         },
         error: (error) => {
           console.log('Error al cargar vehículos', error);
         }
       });
+    }
+
+    handleInput(event: Event) {
+      const target = event.target as HTMLIonSearchbarElement;
+      const query = target.value?.toLowerCase() || '';
+
+      this.results = this.vehiculos.filter((v) =>
+        v.patente.toLowerCase().includes(query) ||
+        v.modelo.toLowerCase().includes(query) ||
+        v.marca.toLowerCase().includes(query)
+      );
     }
 }

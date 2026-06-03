@@ -8,21 +8,24 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-searchbar placeholder="Buscar vehículo..."></ion-searchbar>
-  <ion-button fill="clear" routerLink="/datos-vehiculo">
-      <ion-card *ngFor="let vehiculo of vehiculos">
-        <ion-icon name="cart-outline" size="large"></ion-icon>
-        <ion-card-header>
-          <ion-card-subtitle>{{ vehiculo.modelo }}</ion-card-subtitle>
-          <ion-card-title>{{ vehiculo.patente }}</ion-card-title>
-        </ion-card-header>
 
-        <ion-card-content>
-          <strong>Km:</strong> {{ vehiculo.kilometrajeActual }}<br>
-          <strong>Próximo Km:</strong> {{ vehiculo.proximoKilometraje }}<br>
-          <strong>Estado DPF:</strong> {{ vehiculo.estadoDpf }}<br>
-          <strong>Observación:</strong> {{ vehiculo.observacion }}
-        </ion-card-content>
-      </ion-card>
-  </ion-button>
+  <ion-searchbar animated="true" placeholder="Buscar vehículo..." (ionInput)="handleInput($event)"></ion-searchbar>
+
+
+  <ion-card *ngFor="let vehiculo of results" routerLink="/datos-vehiculo">
+    <ion-icon name="car-outline" size="large"></ion-icon>
+    <ion-card-header>
+      <ion-card-subtitle>{{ vehiculo.modelo }}</ion-card-subtitle>
+      <ion-card-title>{{ vehiculo.patente }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <strong>Km:</strong> {{ vehiculo.kilometrajeActual }} <br>
+      <strong>Próximo Km:</strong> {{ vehiculo.proximoKilometraje }} <br>
+      <strong>Estado DPF:</strong> {{ vehiculo.estadoDpf }} <br>
+      <strong>Observación:</strong> {{ vehiculo.observacion }}
+    </ion-card-content>
+
+  </ion-card>
+
 </ion-content>

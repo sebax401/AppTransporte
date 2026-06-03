@@ -14,4 +14,8 @@ export const routes: Routes = [
     path: 'datos-vehiculo',
     loadComponent: () => import('./datos-vehiculo/datos-vehiculo.page').then( m => m.DatosVehiculoPage)
   },
+  {
+    path: 'agregar-vehiculo',
+    loadComponent: () => import('./agregar-vehiculo/agregar-vehiculo.page').then( m => m.AgregarVehiculoPage)
+  },
 ];
