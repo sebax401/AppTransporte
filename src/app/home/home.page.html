@@ -12,7 +12,7 @@
   <ion-searchbar animated="true" placeholder="Buscar vehículo..." (ionInput)="handleInput($event)"></ion-searchbar>
 
 
-  <ion-card *ngFor="let vehiculo of results" routerLink="/datos-vehiculo">
+  <ion-card *ngFor="let vehiculo of results" routerLink="/datos-vehiculo/{{ vehiculo.idVehiculo }}">
     <ion-icon name="car-outline" size="large"></ion-icon>
     <ion-card-header>
       <ion-card-subtitle>{{ vehiculo.modelo }}</ion-card-subtitle>

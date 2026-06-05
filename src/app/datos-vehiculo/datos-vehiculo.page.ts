@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, 
           IonTitle, IonMenuButton, IonButton, IonButtons, IonToolbar, IonHeader, IonLabel } from '@ionic/angular/standalone';
 
+import { ActivatedRoute } from '@angular/router';
+
 import {RouterLink} from '@angular/router';
 
 import { VehiculoService, Vehiculo } from '../services/vehiculo';
@@ -18,14 +20,25 @@ import { VehiculoService, Vehiculo } from '../services/vehiculo';
 })
 export class DatosVehiculoPage implements OnInit {
 
+  vehiculo?: Vehiculo
   vehiculos: Vehiculo[] = [];
 
-    constructor(private vehiculoService: VehiculoService) {}
+    constructor(private vehiculoService: VehiculoService, private route: ActivatedRoute) {}
 
-        ngOnInit() {
-          console.log('Home cargado');
-          this.cargarVehiculos();
-        }
+      ngOnInit() {
+
+        const id = Number(this.route.snapshot.paramMap.get('id'));
+
+        this.vehiculoService.obtenerVehiculo(id).subscribe({
+          next: (data) => {
+            this.vehiculo = data;
+          },
+          error: (error) => {
+            console.error(error);
+          }
+      });
+    }
+
 
     cargarVehiculos() {
       this.vehiculoService.obtenerVehiculos().subscribe({
@@ -38,4 +51,36 @@ export class DatosVehiculoPage implements OnInit {
       });
     }
 
+    modificarVehiculo() {
+      if (!this.vehiculo) return;
+
+      this.vehiculoService.modificarVehiculo(this.vehiculo.idVehiculo, this.vehiculo).subscribe({
+        next: () => {
+          alert('Vehículo modificado correctamente');
+        },
+        error: (error) => {
+          console.error('Error al modificar:', error);
+          alert('Error al modificar vehículo');
+        }
+      });
+    }
+
+  eliminarVehiculo() {
+    if (!this.vehiculo) return;
+
+    const confirmar = confirm('¿Seguro que deseas eliminar este vehículo?');
+
+    if (!confirmar) return;
+
+    this.vehiculoService.eliminarVehiculo(this.vehiculo.idVehiculo).subscribe({
+      next: () => {
+        alert('Vehículo eliminado correctamente');
+        window.location.href = '/home';
+      },
+      error: (error) => {
+        console.error('Error al eliminar:', error);
+        alert('Error al eliminar vehículo');
+      }
+    });
+  }
 }

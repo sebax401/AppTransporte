@@ -1,17 +1,52 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title></ion-title>
+    <ion-title>Detalle Vehículo</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large" >Patente</ion-title>
-      <ion-label *ngFor="let vehiculo of vehiculos">{{ vehiculo.patente }}</ion-label>
-    </ion-toolbar>
-  </ion-header>
+<ion-content *ngIf="vehiculo">
+
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title>{{ vehiculo.patente }}</ion-card-title>
+      <ion-card-subtitle>{{ vehiculo.modelo }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <p><strong>Marca:</strong> {{ vehiculo.marca }}</p>
+
+      <p><strong>Año:</strong> {{ vehiculo.anio }}</p>
+
+      <p><strong>Km Actual:</strong> {{ vehiculo.kilometrajeActual }}</p>
+
+      <p><strong>Próximo Km:</strong> {{ vehiculo.proximoKilometraje }}</p>
+
+      <p><strong>Estado DPF:</strong> {{ vehiculo.estadoDpf }}</p>
+
+      <p><strong>Estado Revisión:</strong> {{ vehiculo.estadoRevision }}</p>
+
+      <p><strong>Estado Extintor:</strong> {{ vehiculo.estadoExtintor }}</p>
+
+      <p><strong>Observación:</strong> {{ vehiculo.observacion }}</p>
+
+      <p><strong>Última Mantención:</strong>
+        {{ vehiculo.fechaUltimaMantencion }}
+      </p>
+
+      <p><strong>Próxima Mantención:</strong>
+        {{ vehiculo.fechaProximaMantencion }}
+      </p>
+
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" color="warning" (click)="modificarVehiculo()">
+    Modificar vehículo
+  </ion-button>
+
+  <ion-button expand="block" color="danger" (click)="eliminarVehiculo()">
+    Eliminar vehículo
+  </ion-button>
 </ion-content>

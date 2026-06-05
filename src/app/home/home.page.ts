@@ -49,9 +49,7 @@ export class HomePage {
       const query = target.value?.toLowerCase() || '';
 
       this.results = this.vehiculos.filter((v) =>
-        v.patente.toLowerCase().includes(query) ||
-        v.modelo.toLowerCase().includes(query) ||
-        v.marca.toLowerCase().includes(query)
+        v.patente.toLowerCase().includes(query)
       );
     }
 }

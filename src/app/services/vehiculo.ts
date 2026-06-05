@@ -41,4 +41,15 @@ export class VehiculoService {
   obtenerVehiculos(): Observable<Vehiculo[]> {
     return this.http.get<Vehiculo[]>(this.apiUrl);
   }
+  obtenerVehiculo(id: number): Observable<Vehiculo> {
+    return this.http.get<Vehiculo>(`${this.apiUrl}/${id}`);
+  }
+
+  modificarVehiculo(id: number, vehiculo: Vehiculo): Observable<void> {
+    return this.http.put<void>(`${this.apiUrl}/${id}`, vehiculo);
+  }
+
+  eliminarVehiculo(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }
