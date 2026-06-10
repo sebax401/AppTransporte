@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Capacitor } from '@capacitor/core';
 
 export interface Vehiculo {
   idVehiculo: number;
@@ -8,12 +9,11 @@ export interface Vehiculo {
   marca: string;
   modelo: string;
   anio: number;
-  kilometrajeActual: number;
   proximoKilometraje: number;
 
-  fechaRevisionTecnica: string | null;
-  fechaUltimaMantencion: string | null;
-  fechaProximaMantencion: string | null;
+  fechaRevisionTecnica: Date | null;
+  fechaUltimaMantencion: Date | null;
+  fechaProximaMantencion: Date | null;
 
   estadoDpf: string;
   estadoRevision: string;
@@ -30,9 +30,12 @@ export interface Vehiculo {
 })
 export class VehiculoService {
 
-  private apiUrl = 'https://localhost:7218/api/Vehiculos';
 
-  constructor(private http: HttpClient) {}
+  private apiUrl = 'https://apitransporte.onrender.com/api/Vehiculos';
+
+  constructor(private http: HttpClient) {
+    console.log('API URL usada:', this.apiUrl);
+  }
 
   agregarVehiculo(vehiculo: Vehiculo): Observable<Vehiculo> {
     return this.http.post<Vehiculo>(this.apiUrl, vehiculo);

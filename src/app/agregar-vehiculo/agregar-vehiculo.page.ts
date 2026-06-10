@@ -3,10 +3,12 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   IonHeader, IonToolbar, IonTitle, IonContent, IonItem,
-  IonLabel, IonInput, IonButton, IonButtons, IonBackButton
+  IonLabel, IonInput, IonButton, IonButtons, IonBackButton, IonSelect, IonSelectOption,
 } from '@ionic/angular/standalone';
 
 import { VehiculoService, Vehiculo } from '../services/vehiculo';
+
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-agregar-vehiculo',
@@ -16,10 +18,10 @@ import { VehiculoService, Vehiculo } from '../services/vehiculo';
   imports: [
     FormsModule,
     IonHeader, IonToolbar, IonTitle, IonContent, IonItem,
-    IonLabel, IonInput, IonButton, IonButtons, IonBackButton
-  ]
+    IonLabel, IonInput, IonButton, IonButtons, IonBackButton, IonSelect, IonSelectOption,  ]
 })
 export class AgregarVehiculoPage {
+  
 
   vehiculo: Vehiculo = {
     idVehiculo: null as any,
@@ -27,11 +29,10 @@ export class AgregarVehiculoPage {
     marca: '',
     modelo: '',
     anio: 2026,
-    kilometrajeActual: 0,
     proximoKilometraje: 0,
-    fechaRevisionTecnica: '',
-    fechaUltimaMantencion: '',
-    fechaProximaMantencion: '',
+    fechaRevisionTecnica: null,
+    fechaUltimaMantencion: null,
+    fechaProximaMantencion: null,
     estadoDpf: '',
     estadoRevision: '',
     estadoExtintor: '',
@@ -42,7 +43,8 @@ export class AgregarVehiculoPage {
 
   constructor(
     private vehiculoService: VehiculoService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   guardarVehiculo() {
@@ -50,7 +52,6 @@ export class AgregarVehiculoPage {
       ...this.vehiculo,
       idVehiculo: 0,
       anio: Number(this.vehiculo.anio),
-      kilometrajeActual: Number(this.vehiculo.kilometrajeActual),
       proximoKilometraje: Number(this.vehiculo.proximoKilometraje),
       fechaRevisionTecnica: null,
       fechaUltimaMantencion: null,
@@ -64,7 +65,9 @@ export class AgregarVehiculoPage {
     this.vehiculoService.agregarVehiculo(vehiculoEnviar).subscribe({
       next: () => {
         alert('Vehículo agregado correctamente');
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home'], {
+          queryParams: { refresh: new Date().getTime() }
+        });
       },
       error: (error) => {
         console.error('Error completo:', error);
@@ -73,4 +76,5 @@ export class AgregarVehiculoPage {
       }
     });
   }
+  
 }

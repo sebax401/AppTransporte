@@ -2,9 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, 
-          IonTitle, IonMenuButton, IonButton, IonButtons, IonToolbar, IonHeader, IonLabel, IonItem, IonInput, IonAccordion, IonAccordionGroup } from '@ionic/angular/standalone';
+          IonTitle, IonMenuButton, IonButton, IonButtons, IonToolbar, IonHeader, IonLabel, IonItem, IonInput, IonAccordion, IonAccordionGroup,
+          IonSelect, IonSelectOption, IonBackButton, } from '@ionic/angular/standalone';
 
 import { ActivatedRoute } from '@angular/router';
+
+import { addIcons } from 'ionicons';
+import {IonIcon} from '@ionic/angular/standalone';
+import { trashBinOutline } from 'ionicons/icons';
 
 import {RouterLink} from '@angular/router';
 
@@ -16,14 +21,18 @@ import { VehiculoService, Vehiculo } from '../services/vehiculo';
   styleUrls: ['./datos-vehiculo.page.scss'],
   standalone: true,
   imports: [IonContent, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonTitle, 
-            IonMenuButton, IonButton, IonButtons, IonToolbar, IonHeader, IonLabel, CommonModule, FormsModule, RouterLink, IonItem, IonInput, FormsModule, IonAccordion, IonAccordionGroup ]
+            IonMenuButton, IonButton, IonButtons, IonToolbar, IonHeader, IonLabel, CommonModule, FormsModule, RouterLink, IonItem, IonInput, 
+            FormsModule, IonAccordion, IonAccordionGroup, IonSelect, IonSelectOption, IonBackButton, IonIcon ]
 })
 export class DatosVehiculoPage implements OnInit {
 
   vehiculo?: Vehiculo
   vehiculos: Vehiculo[] = [];
+  results: Vehiculo[] = [];
 
-    constructor(private vehiculoService: VehiculoService, private route: ActivatedRoute) {}
+    constructor(private vehiculoService: VehiculoService, private route: ActivatedRoute) {
+      addIcons({trashBinOutline});
+    }
 
       ngOnInit() {
 
@@ -54,7 +63,6 @@ export class DatosVehiculoPage implements OnInit {
   modificarVehiculo() {
     if (!this.vehiculo) return;
 
-    this.vehiculo.kilometrajeActual = Number(this.vehiculo.kilometrajeActual);
     this.vehiculo.proximoKilometraje = Number(this.vehiculo.proximoKilometraje);
 
     this.vehiculoService.modificarVehiculo(

@@ -30,11 +30,6 @@
   </ion-item>
 
   <ion-item>
-    <ion-label position="floating">Kilometraje actual</ion-label>
-    <ion-input type="number" [(ngModel)]="vehiculo.kilometrajeActual"></ion-input>
-  </ion-item>
-
-  <ion-item>
     <ion-label position="floating">Próximo kilometraje</ion-label>
     <ion-input type="number" [(ngModel)]="vehiculo.proximoKilometraje"></ion-input>
   </ion-item>
@@ -42,22 +37,26 @@
   <ion-item>
     <ion-label position="floating">Estado DPF</ion-label>
     <ion-input [(ngModel)]="vehiculo.estadoDpf"></ion-input>
-  </ion-item>
+  </ion-item><br><br>
 
   <ion-item>
-    <ion-label position="floating">Estado revisión</ion-label>
-    <ion-input [(ngModel)]="vehiculo.estadoRevision"></ion-input>
-  </ion-item>
-
+    <ion-select label="Estado revisión" placeholder="Seleccione" [(ngModel)]="vehiculo.estadoRevision">
+    <ion-select-option value="Vigente">Vigente</ion-select-option>
+    <ion-select-option value="Vencido">Vencido</ion-select-option>
+    </ion-select>
+  </ion-item><br><br>
+            
   <ion-item>
-    <ion-label position="floating">Estado extintor</ion-label>
-    <ion-input [(ngModel)]="vehiculo.estadoExtintor"></ion-input>
-  </ion-item>
+    <ion-select label="Estado extintor" placeholder="Seleccione" [(ngModel)]="vehiculo.estadoExtintor">
+      <ion-select-option value="Vigente">Vigente</ion-select-option>
+        <ion-select-option value="Vencido">Vencido</ion-select-option>
+        </ion-select>
+      </ion-item>
 
   <ion-item>
     <ion-label position="floating">Observación</ion-label>
     <ion-input [(ngModel)]="vehiculo.observacion"></ion-input>
-  </ion-item>
+  </ion-item><br><br>
 
   <ion-button expand="block" (click)="guardarVehiculo()">
     Guardar vehículo
