@@ -28,19 +28,20 @@
 
       <p><strong>Estado DPF:</strong> {{ vehiculo.estadoDpf }}</p>
 
-      <p><strong>Estado Revisión:</strong> {{ vehiculo.estadoRevision }}</p>
+      <div style="display: flex; align-items: center; gap: 8px;">
+        <strong><p>Estado de revisión:</p></strong>
+        <ion-chip color="success" *ngIf="vehiculo.estadoRevision === 'Vigente'">
+          <ion-label>Vigente</ion-label>
+        </ion-chip>
+        <ion-chip color="danger" *ngIf="vehiculo.estadoRevision === 'Vencido'">
+          <ion-label>Vencido</ion-label>
+        </ion-chip>
+      </div>
 
       <p><strong>Estado Extintor:</strong> {{ vehiculo.estadoExtintor }}</p>
 
       <p><strong>Observación:</strong> {{ vehiculo.observacion }}</p>
-
-      <p><strong>Última Mantención:</strong>
-        {{ vehiculo.fechaUltimaMantencion }}
-      </p>
-
-      <p><strong>Próxima Mantención:</strong>
-        {{ vehiculo.fechaProximaMantencion }}
-      </p>
+      
       <ion-accordion-group>
         <ion-accordion value="first">
           <ion-item slot="header" color="light">

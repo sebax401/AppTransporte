@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, 
           IonTitle, IonMenuButton, IonButton, IonButtons, IonToolbar, IonHeader, IonLabel, IonItem, IonInput, IonAccordion, IonAccordionGroup,
-          IonSelect, IonSelectOption, IonBackButton, } from '@ionic/angular/standalone';
+          IonSelect, IonSelectOption, IonBackButton, IonChip } from '@ionic/angular/standalone';
 
 import { ActivatedRoute } from '@angular/router';
 
@@ -22,7 +22,7 @@ import { VehiculoService, Vehiculo } from '../services/vehiculo';
   standalone: true,
   imports: [IonContent, IonCard, IonCardContent, IonCardHeader, IonCardSubtitle, IonCardTitle, IonTitle, 
             IonMenuButton, IonButton, IonButtons, IonToolbar, IonHeader, IonLabel, CommonModule, FormsModule, RouterLink, IonItem, IonInput, 
-            FormsModule, IonAccordion, IonAccordionGroup, IonSelect, IonSelectOption, IonBackButton, IonIcon ]
+            FormsModule, IonAccordion, IonAccordionGroup, IonSelect, IonSelectOption, IonBackButton, IonIcon, IonChip ]
 })
 export class DatosVehiculoPage implements OnInit {
 
