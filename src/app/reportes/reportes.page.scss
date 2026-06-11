@@ -1,40 +1,45 @@
-ion-card {
-  margin: 16px;
-}
-
-ion-accordion {
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-ion-label {
-  font-weight: 500;
-}.reportes-page {
-  --background: #0f172a;
+.reportes-page {
+  --background: #f4f7fa;
 }
 
 .section-card {
   margin: 16px;
-  border-radius: 20px;
 }
 
 .reporte-card {
-  margin: 12px 0;
-  border-radius: 16px;
-  background: #111827;
+  border-left: 6px solid #16a34a;
+}
+
+.reporte-card p {
+  margin: 6px 0;
+  color: #374151 !important;
 }
 
 .empty-state {
-  color: #94a3b8;
   text-align: center;
+  padding: 20px;
+  color: #6b7280 !important;
+}
+
+.section-card {
+  margin: 16px;
+  border-radius: 22px;
+  background: #ffffff;
+}
+
+.reporte-card {
+  background: #f9fafb;
+  border-radius: 18px;
+  box-shadow: none;
+  border-left: 5px solid #16a34a;
+}
+
+.empty-state {
+  text-align: center;
+  color: #6b7280 !important;
   padding: 20px;
 }
 
-.estado-pendiente {
-  display: inline-block;
-  background: rgba(234, 179, 8, 0.15);
-  color: #eab308;
-  padding: 6px 12px;
-  border-radius: 999px;
-  font-weight: 700;
+ion-button {
+  margin-top: 14px;
 }

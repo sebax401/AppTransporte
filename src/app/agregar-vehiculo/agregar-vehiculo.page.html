@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-
+<div class="form-card">
   <ion-item>
     <ion-label position="floating">Patente</ion-label>
     <ion-input [(ngModel)]="vehiculo.patente"></ion-input>
@@ -39,11 +39,14 @@
     <ion-input [(ngModel)]="vehiculo.estadoDpf"></ion-input>
   </ion-item><br><br>
 
-  <ion-item>
-    <label>Estado revisión</label>
-    <ion-label position="floating">Ingrese la fecha de vencimiento</ion-label>
-    <ion-datetime presentation="date" [preferWheel]="true" [(ngModel)]="vehiculo.fechaRevisionTecnica" (ionChange)="actualizarEstadoRevision()" max="2100-12-31"></ion-datetime>
-  </ion-item><br><br>
+<ion-item>
+  <ion-label position="stacked">Fecha vencimiento revisión</ion-label>
+  <ion-input
+    type="date"
+    [(ngModel)]="vehiculo.fechaRevisionTecnica"
+    (ionChange)="actualizarEstadoRevision()">
+  </ion-input>
+</ion-item>
             
   <ion-item>
     <ion-select label="Estado extintor" placeholder="Seleccione" [(ngModel)]="vehiculo.estadoExtintor">
@@ -60,5 +63,6 @@
   <ion-button expand="block" (click)="guardarVehiculo()">
     Guardar vehículo
   </ion-button>
+</div>
 
 </ion-content>
