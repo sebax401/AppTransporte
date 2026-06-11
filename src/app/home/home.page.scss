@@ -25,3 +25,46 @@
 #container a {
   text-decoration: none;
 }
+
+ion-card {
+  border-radius: 18px;
+  background: #1e293b;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  padding: 8px;
+}
+
+ion-card-title {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+ion-card-subtitle {
+  color: #94a3b8;
+}
+
+ion-card-content {
+  color: #e2e8f0;
+}
+
+ion-searchbar {
+  --border-radius: 16px;
+  --background: #1e293b;
+  --color: #ffffff;
+  --placeholder-color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+ion-card {
+  margin: 16px;
+  padding: 4px;
+}
+
+ion-card-content p {
+  margin: 6px 0;
+}
+
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

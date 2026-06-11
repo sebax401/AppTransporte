@@ -1,0 +1,40 @@
+ion-card {
+  margin: 16px;
+}
+
+ion-accordion {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+ion-label {
+  font-weight: 500;
+}.reportes-page {
+  --background: #0f172a;
+}
+
+.section-card {
+  margin: 16px;
+  border-radius: 20px;
+}
+
+.reporte-card {
+  margin: 12px 0;
+  border-radius: 16px;
+  background: #111827;
+}
+
+.empty-state {
+  color: #94a3b8;
+  text-align: center;
+  padding: 20px;
+}
+
+.estado-pendiente {
+  display: inline-block;
+  background: rgba(234, 179, 8, 0.15);
+  color: #eab308;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+}

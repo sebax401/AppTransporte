@@ -6,99 +6,98 @@
     <ion-title>Detalle Vehículo</ion-title>
   </ion-toolbar>
 </ion-header>
-<div style="height: 100%" >
-  <ion-card>
+
+<ion-content class="reportes-page">
+
+  <ion-card class="section-card">
     <ion-card-header>
       <ion-card-title>Reportes</ion-card-title>
     </ion-card-header>
 
-    <ion-item *ngFor="let reporte of reportes">
-      <ion-label>
-        <h2>{{ reporte.tipoReporte }}</h2>
-        <p>{{ reporte.descripcion }}</p>
-        <p>{{ reporte.fechaGeneracion }}</p>
-        <p *ngIf="reporte.valorRepuesto === null">
-          Estado: Pendiente de repuesto
-        </p>
+    <ion-card-content>
 
-        <p *ngIf="reporte.nombreRepuesto">
-          Repuesto: {{ reporte.nombreRepuesto }}
-        </p>
+      <div *ngIf="reportes.length === 0" class="empty-state">
+        No hay reportes registrados.
+      </div>
 
-        <p *ngIf="reporte.valorRepuesto !== null">
-          Valor repuesto: ${{ reporte.valorRepuesto }}
-        </p>
+      <ion-card class="reporte-card" *ngFor="let reporte of reportes">
+        <ion-card-header>
+          <ion-card-title>{{ reporte.tipoReporte }}</ion-card-title>
+        </ion-card-header>
 
-        <p *ngIf="reporte.lugarCompra">
-          Lugar compra: {{ reporte.lugarCompra }}
-        </p>
+        <ion-card-content>
+          <p>{{ reporte.descripcion }}</p>
+          <p><strong>Fecha:</strong> {{ reporte.fechaGeneracion | date:'dd/MM/yyyy' }}</p>
 
-        <ion-button
-          *ngIf="reporte.valorRepuesto === null && repuestoEditando !== reporte.idReporte"
-          expand="block"
-          color="warning"
-          (click)="mostrarFormularioRepuesto(reporte)">
-          Agregar repuesto
-        </ion-button>
+          <p *ngIf="reporte.valorRepuesto === null" class="estado-pendiente">
+            Pendiente de repuesto
+          </p>
 
-        <div *ngIf="repuestoEditando === reporte.idReporte">
+          <p *ngIf="reporte.nombreRepuesto">
+            <strong>Repuesto:</strong> {{ reporte.nombreRepuesto }}
+          </p>
 
-          <ion-item>
-            <ion-label position="stacked">Nombre del repuesto</ion-label>
-            <ion-input
-              [(ngModel)]="repuestoForm.nombreRepuesto">
-            </ion-input>
-          </ion-item>
+          <p *ngIf="reporte.valorRepuesto !== null">
+            <strong>Valor:</strong> ${{ reporte.valorRepuesto }}
+          </p>
 
-          <ion-item>
-            <ion-label position="stacked">Valor del repuesto</ion-label>
-            <ion-input
-              type="number"
-              [(ngModel)]="repuestoForm.valorRepuesto">
-            </ion-input>
-          </ion-item>
-
-          <ion-item>
-            <ion-label position="stacked">Lugar de compra</ion-label>
-            <ion-input
-              [(ngModel)]="repuestoForm.lugarCompra">
-            </ion-input>
-          </ion-item>
+          <p *ngIf="reporte.lugarCompra">
+            <strong>Lugar:</strong> {{ reporte.lugarCompra }}
+          </p>
 
           <ion-button
+            *ngIf="reporte.valorRepuesto === null && repuestoEditando !== reporte.idReporte"
             expand="block"
-            color="success"
-            (click)="guardarRepuesto(reporte)">
-            Guardar repuesto
+            color="warning"
+            (click)="mostrarFormularioRepuesto(reporte)">
+            Agregar repuesto
           </ion-button>
 
-        </div>
-      </ion-label>
-    </ion-item>
+          <div *ngIf="repuestoEditando === reporte.idReporte">
+            <ion-item>
+              <ion-label position="stacked">Nombre del repuesto</ion-label>
+              <ion-input [(ngModel)]="repuestoForm.nombreRepuesto"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Valor del repuesto</ion-label>
+              <ion-input type="number" [(ngModel)]="repuestoForm.valorRepuesto"></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="stacked">Lugar de compra</ion-label>
+              <ion-input [(ngModel)]="repuestoForm.lugarCompra"></ion-input>
+            </ion-item>
+
+            <ion-button
+              expand="block"
+              color="success"
+              (click)="guardarRepuesto(reporte)">
+              Guardar repuesto
+            </ion-button>
+          </div>
+        </ion-card-content>
+      </ion-card>
+
+    </ion-card-content>
   </ion-card>
-</div>
 
-<ion-card>
-  <ion-accordion-group>
-    <ion-accordion value="first">
+  <ion-card class="section-card">
+    <ion-accordion-group>
+      <ion-accordion value="first">
+        <ion-item slot="header">
+          <ion-label>Generar Reporte</ion-label>
+        </ion-item>
 
-      <ion-item slot="header" color="light">
-        <ion-label>Generar Reporte</ion-label>
-      </ion-item>
-
-      <div class="ion-padding" slot="content">
-        <ion-card-content>
-
+        <div class="ion-padding" slot="content">
           <ion-item>
             <ion-select
               label="Tipo de Reporte"
               placeholder="Seleccione"
               [(ngModel)]="reporte.tipoReporte">
-
               <ion-select-option value="falla">Falla</ion-select-option>
               <ion-select-option value="mantencion">Mantención</ion-select-option>
               <ion-select-option value="revision">Revisión Técnica</ion-select-option>
-
             </ion-select>
           </ion-item>
 
@@ -137,10 +136,9 @@
           <ion-button expand="block" (click)="generarReporte()">
             Generar reporte
           </ion-button>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </ion-card>
 
-        </ion-card-content>
-      </div>
-
-    </ion-accordion>
-  </ion-accordion-group>
-</ion-card>
+</ion-content>
