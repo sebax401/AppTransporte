@@ -16,18 +16,20 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class ReportesPage implements OnInit {
+  
+  private apiUrl = 'https://apitransporte.onrender.com/api/Reportes';
 
   subTipo: string = ''
 
   reporte = {
     idReporte: 0,
-    tipoReporte: '',
-    fechaGeneracion: '',
-    descripcion: '',
-    idVehiculo: 0,
-    nombreRepuesto: '',
+    tipoReporte: "falla",
+    fechaGeneracion: "...",
+    descripcion: "",
+    idVehiculo: 1,
+    nombreRepuesto: "",
     valorRepuesto: null,
-    lugarCompra: '',
+    lugarCompra: ""
   };
 
   reportes: Reporte[] = [];
@@ -71,34 +73,33 @@ export class ReportesPage implements OnInit {
   generarReporte() {
     const idVehiculo = Number(this.route.snapshot.paramMap.get('id'));
 
-    const reporteEnviar = {
-      idReporte: 0,
-      idUsuario: 1,
-      tipoReporte: this.reporte.tipoReporte,
-      fechaGeneracion: new Date().toISOString(),
-      descripcion: this.reporte.descripcion,
-      idVehiculo: idVehiculo,
-      nombreRepuesto: "",
-      valorRepuesto: null,
-      lugarCompra: '',
-    };
-
     const descripcionFinal =
       `${this.reporte.tipoReporte} - ${this.subTipo}: ${this.reporte.descripcion}`;
 
-      console.log('Reporte enviado:', reporteEnviar);
+    const reporteEnviar = {
+      idReporte: 0,
+      tipoReporte: this.reporte.tipoReporte,
+      fechaGeneracion: new Date().toISOString(),
+      descripcion: descripcionFinal,
+      idVehiculo: idVehiculo,
+      nombreRepuesto: '',
+      valorRepuesto: null,
+      lugarCompra: ''
+    };
 
-      this.reporteService.crearReporte(reporteEnviar).subscribe({
-        next: () => {
-          alert('Reporte generado correctamente');
-          this.cargarReportes();
-        },
-        error: (error) => {
-          console.error('Error completo:', error);
-          console.error('Detalle:', error.error);
-          alert(JSON.stringify(error.error));
-        }
-      });
+    console.log('Reporte enviado:', reporteEnviar);
+
+    this.reporteService.crearReporte(reporteEnviar).subscribe({
+      next: () => {
+        alert('Reporte generado correctamente');
+        this.cargarReportes();
+      },
+      error: (error) => {
+        console.error('Error completo:', error);
+        console.error('Detalle:', error.error);
+        alert(JSON.stringify(error.error));
+      }
+    });
   }
 
   mostrarFormularioRepuesto(reporte: Reporte) {
@@ -114,6 +115,7 @@ export class ReportesPage implements OnInit {
   guardarRepuesto(reporte: Reporte) {
     const reporteActualizado: Reporte = {
       ...reporte,
+      nombreRepuesto: this.repuestoForm.nombreRepuesto,
       valorRepuesto: this.repuestoForm.valorRepuesto,
       lugarCompra: this.repuestoForm.lugarCompra
     };
