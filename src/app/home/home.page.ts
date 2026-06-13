@@ -38,6 +38,10 @@ export class HomePage {
   vehiculos: Vehiculo[] = [];
   results: Vehiculo[] = [];
 
+  ionViewWillEnter() {
+    this.cargarVehiculos();
+  }
+
     constructor(private vehiculoService: VehiculoService, private notificacionService: NotificacionService,private route: ActivatedRoute) {
       addIcons({ cartOutline, addCircleOutline });
     }
